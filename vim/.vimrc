@@ -14,6 +14,7 @@ call plug#end()
 set number
 set relativenumber
 set cursorline
+set guicursor=a:blinkon1
 
 set autoindent
 set smartindent
@@ -25,6 +26,12 @@ syntax enable
 set termguicolors
 set background=dark
 colorscheme gruvbox
+
+" Enable spell checking only for writing
+augroup SpellCheck
+    autocmd!
+    autocmd FileType markdown,text,gitcommit setlocal spell spelllang=en_US
+augroup END
 
 " ===== 2026/03/31 =====
 nnoremap <C-n> :NERDTreeToggle<CR>
