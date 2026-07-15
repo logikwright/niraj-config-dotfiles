@@ -6,7 +6,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.vim'
+Plug 'neoclide/coc.nvim'
 
 call plug#end()
 
