@@ -28,10 +28,12 @@ set termguicolors
 set background=dark
 colorscheme gruvbox
 
+highlight SpellBad cterm=NONE ctermfg=Red ctermbg=LightYellow
+
 " Enable spell checking only for writing
 augroup SpellCheck
     autocmd!
-    autocmd FileType markdown,text,gitcommit setlocal spell spelllang=en_US
+    autocmd FileType markdown,text,gitcommit setlocal spell spelllang=en
 augroup END
 
 " ===== 2026/03/31 =====
