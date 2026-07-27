@@ -10,7 +10,7 @@ JETBRAINS_MONO_VERSION="2.304"
 FONT_NAME="JetBrainsMono"
 
 BASE_URL="https://download.jetbrains.com/fonts"
-DOWNLOAD_URL=$"${BASE_URL}/JetBrainsMono-${JETBRAINS_MONO_VERSION}.zip"
+DOWNLOAD_URL="${BASE_URL}/${FONT_NAME}-${JETBRAINS_MONO_VERSION}.zip"
 
 TEMP_DIR="/tmp"
 EXTRACT_DIR="${TEMP_DIR}/${FONT_NAME}"
@@ -37,19 +37,9 @@ fi
 
 echo "Downloading ${FONT_NAME} ${JETBRAINS_MONO_VERSION}..."
 
-curl -L \
+curl --fail --location \
     --output "${ZIP_FILE}" \
     "${DOWNLOAD_URL}"
-
-
-# --------------------------------------------------
-# Verify Download
-# --------------------------------------------------
-
-if [[ ! -f "${ZIP_FILE}"]]; then
-    echo "Error: Failed to download ${FONT_NAME}."
-    exit 1
-fi
 
 # --------------------------------------------------
 # Install Font 
@@ -59,7 +49,7 @@ echo "Installing ${FONT_NAME}..."
 mkdir -p "${INSTALL_DIR}"
 mkdir -p "${EXTRACT_DIR}"
 
-unzip -o \
+unzip -oq \
     "${ZIP_FILE}" \
     -d "${EXTRACT_DIR}"
 
@@ -69,3 +59,11 @@ find "${EXTRACT_DIR}" \
     -exec install {} "${INSTALL_DIR}" \;
 
 fc-cache -fv
+
+# --------------------------------------------------
+# Cleanup
+# --------------------------------------------------
+
+rm -rf "${ZIP_FILE}" "${EXTRACT_DIR}"
+
+echo "Successfully installed ${FONT_NAME} ${JETBRAINS_MONO_VERSION}."
