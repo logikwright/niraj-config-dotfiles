@@ -14,7 +14,7 @@ call plug#end()
 set number
 set relativenumber
 set cursorline
-set guicursor=a:blinkon1
+set guicursor=a:blinkon0
 set scrolloff=10
 
 set autoindent
