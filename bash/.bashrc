@@ -121,3 +121,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Load SSH key into the running ssh-agent (interactive shells only)
+if [[ $- == *i* ]] && command -v ssh-add >/dev/null 2>&1; then
+    if ! ssh-add -l >/dev/null 2>&1; then
+        ssh-add ~/.ssh/id_ed25519 </dev/tty
+    fi
+fi
