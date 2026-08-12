@@ -7,15 +7,16 @@ set -e
 # --------------------------------------------------
 
 JETBRAINS_MONO_VERSION="2.304"
-FONT_NAME="JetBrainsMono"
+FONT_FILE_NAME="JetBrainsMono"
+FONT_FAMILY_NAME="JetBrains Mono"
 
 BASE_URL="https://download.jetbrains.com/fonts"
-DOWNLOAD_URL="${BASE_URL}/${FONT_NAME}-${JETBRAINS_MONO_VERSION}.zip"
+DOWNLOAD_URL="${BASE_URL}/${FONT_FILE_NAME}-${JETBRAINS_MONO_VERSION}.zip"
 
 TEMP_DIR="/tmp"
-EXTRACT_DIR="${TEMP_DIR}/${FONT_NAME}"
+EXTRACT_DIR="${TEMP_DIR}/${FONT_FILE_NAME}"
 INSTALL_DIR="${HOME}/.local/share/fonts"
-ZIP_FILE="${TEMP_DIR}/${FONT_NAME}.zip"
+ZIP_FILE="${TEMP_DIR}/${FONT_FILE_NAME}.zip"
 
 # --------------------------------------------------
 # Dependency Checks
@@ -34,8 +35,13 @@ fi
 # --------------------------------------------------
 # Download
 # --------------------------------------------------
+#
+if fc-match "${FONT_FAMILY_NAME}" >/dev/null 2>&1; then
+    echo "JetBrains Mono is already installed. Skipping."
+    exit 0
+fi
 
-echo "Downloading ${FONT_NAME} ${JETBRAINS_MONO_VERSION}..."
+echo "Downloading ${FONT_FAMILY_NAME} ${JETBRAINS_MONO_VERSION}..."
 
 curl --fail --location \
     --output "${ZIP_FILE}" \
@@ -44,7 +50,7 @@ curl --fail --location \
 # --------------------------------------------------
 # Install Font 
 # --------------------------------------------------
-echo "Installing ${FONT_NAME}..."
+echo "Installing ${FONT_FAMILY_NAME}..."
 
 mkdir -p "${INSTALL_DIR}"
 mkdir -p "${EXTRACT_DIR}"
@@ -66,4 +72,4 @@ fc-cache -fv
 
 rm -rf "${ZIP_FILE}" "${EXTRACT_DIR}"
 
-echo "Successfully installed ${FONT_NAME} ${JETBRAINS_MONO_VERSION}."
+echo "Successfully installed ${FONT_FAMILY_NAME} ${JETBRAINS_MONO_VERSION}."
