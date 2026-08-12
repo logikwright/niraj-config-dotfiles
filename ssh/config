@@ -1,0 +1,4 @@
+Host nb-wsl
+    HostName LOGIKWRIGHT.local
+    User niraj
+    IdentityFile ~/.ssh/id_ed25519
