@@ -130,6 +130,6 @@ export NVM_DIR="$HOME/.nvm"
 if [[ $- == *i* ]] && command -v ssh-agent >/dev/null 2>&1 && command -v ssh-add >/dev/null 2>&1; then
     if [ -z "$SSH_AUTH_SOCK" ] ||  ! ssh-add -l >/dev/null 2>&1; then
         eval "$(ssh-agent -s)" >/dev/null
-        ssh-add ~/.ssh/id_ed25519 </dev/tty
+        ssh-add -q ~/.ssh/id_ed25519 </dev/tty >/dev/null 2>&1
     fi
 fi
