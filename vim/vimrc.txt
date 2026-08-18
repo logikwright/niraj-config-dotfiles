@@ -45,11 +45,3 @@ inoremap <silent><expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 inoremap <silent><expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
 inoremap <silent><expr> <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
-
-" Copy uanked text to Windows clipboard (WSL)
-augroup WSLClipboard
-    autocmd!
-    autocmd TextYankPost * if v:event.operator ==# 'y' |
-                \ call system('vim-copy', @0) |
-                \ endif
-augroup END
