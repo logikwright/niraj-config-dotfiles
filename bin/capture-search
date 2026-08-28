@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# ------------------------------
+# Configuration
+# ------------------------------
+
+CONFIG_FILE=".capture-search"
+DEFAULT_CAPTURE_DIR="reverse-engineer"
+DATE_DIR=$(date +%F)
+
+# ------------------------------
+# Functions
+# ------------------------------
+
+initialize_project() {
+    if [[ -f "$CONFIG_FILE" ]]; then
+        echo "This project has already been initialized."
+        exit 0
+    fi
+
+    read -rp "Capture directory [$DEFAULT_CAPTURE_DIR]: " CAPTURE_DIR
+
+    CAPTURE_DIR=${CAPTURE_DIR:-$DEFAULT_CAPTURE_DIR}
+
+    {
+        echo "CAPTURE_DIR=$CAPTURE_DIR"
+    } > "$CONFIG_FILE"
+    
+    echo
+    echo "Initialized project."
+    echo "Configuration written to:"
+    echo "    $CONFIG_FILE"
+    return 0
+}
+
+find_project_root() {
+    local dir="$PWD"
+
+    while [[ "$dir" != "/" ]]; do
+        if [[ -f "$dir/$CONFIG_FILE" ]]; then
+            echo "$dir"
+            return 0
+        fi
+
+        dir=$(dirname "$dir")
+    done
+
+    return 1
+}
+
+next_file_number() {
+    local output_dir="$1"
+
+    local count
+    count=$(find "$output_dir" -maxdepth 1 -type f | wc -l)
+    
+    printf "%03d" $((count + 1))
+}
+
+write_capture() {
+    local outfile="$1"
+
+    {
+        echo "Search   : $TITLE"
+        echo "Date     : $(date)"
+        echo
+        echo "Command:"
+        printf '%q ' "${COMMAND[@]}"
+        echo
+        echo
+        echo "------------------------------"
+        echo "Output"
+        echo "------------------------------"
+        echo
+
+        "${COMMAND[@]}" 2>&1
+    } | tee "$outfile"
+}
+
+# ---------------------
+# Main
+# ---------------------
+
+if [[ "${1:-}" == "--init" ]]; then
+    initialize_project
+    exit 0
+fi
+
+if [[ $# -lt 2 ]]; then
+    echo "Usage: capture-search <title> <command> [args...]"
+    exit 1
+fi
+
+TITLE="$1"
+shift
+COMMAND=("$@")
+
+PROJECT_ROOT=$(find_project_root)
+
+if [[ -z "$PROJECT_ROOT" ]]; then
+    echo "Error: No project has been initialized."
+    echo "Run 'capture-search --init' from your project root first."
+    exit 1
+fi
+
+source "$PROJECT_ROOT/$CONFIG_FILE"
+
+OUTPUT_DIR="$PROJECT_ROOT/$CAPTURE_DIR/$DATE_DIR"
+
+mkdir -p "$OUTPUT_DIR"
+
+NUMBER=$(next_file_number "$OUTPUT_DIR")
+
+OUTFILE="$OUTPUT_DIR/${NUMBER}-${TITLE}.txt"
+
+write_capture "$OUTFILE"
