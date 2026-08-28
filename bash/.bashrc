@@ -126,10 +126,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Configure ssh-agent and load SSH key (interactive shells only)
-if [[ $- == *i* ]] && command -v ssh-agent >/dev/null 2>&1 && command -v ssh-add >/dev/null 2>&1; then
-    if [ -z "$SSH_AUTH_SOCK" ] ||  ! ssh-add -l >/dev/null 2>&1; then
-        eval "$(ssh-agent -s)" >/dev/null
-        ssh-add -q ~/.ssh/id_ed25519 </dev/tty >/dev/null 2>&1
-    fi
-fi
+export PATH="$HOME/dotfiles/bin:$PATH"
