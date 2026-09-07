@@ -7,6 +7,10 @@ Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim'
+" ===== 2026/09/06 =====
+Plug 'prabirshrestha/vim-lsp'
+Plug 'OmniSharp/omnisharp-vim'
+let g:OmniSharp_server_use_net6 = 1
 
 call plug#end()
 
