@@ -39,7 +39,7 @@ fi
 # Download
 # --------------------------------------------------
 
-if fc-match "${FONT_FAMILY_NAME}" >/dev/null 2>&1; then
+if fc-list | grep -Fq "${FONT_FAMILY_NAME}"; then
     echo "${FONT_FAMILY_NAME} is already installed. Skipping."
     exit 0
 fi
@@ -66,7 +66,7 @@ unzip -oq \
 find "${EXTRACT_DIR}" \
     -type f \
     -name "*.ttf" \
-    -exec install {} "${INSTALL_DIR}" \;
+    -exec install -m 644 {} "${INSTALL_DIR}" \;
 
 fc-cache -fv
 
