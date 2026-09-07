@@ -11,7 +11,7 @@ CASCADIA_CODE_VERSION="2407.24"
 FONT_FILE_NAME="CascadiaCode"
 FONT_FAMILY_NAME="Cascadia Code"
 
-BASE_URL="https://github.com/microsoft/cascasde-code/releases/download/v${CASCADIA_CODE_VERSION}"
+BASE_URL="https://github.com/microsoft/cascadia-code/releases/download/v${CASCADIA_CODE_VERSION}"
 DOWNLOAD_URL="${BASE_URL}/${FONT_FILE_NAME}-${CASCADIA_CODE_VERSION}.zip"
 
 TEMP_DIR="/tmp"
