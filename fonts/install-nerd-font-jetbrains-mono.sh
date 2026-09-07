@@ -16,6 +16,18 @@ EXTRACT_DIR="${TEMP_DIR}/${FONT_FILE_NAME}"
 INSTALL_DIR="${HOME}/.local/share/fonts"
 ZIP_FILE="${TEMP_DIR}/${FONT_FILE_NAME}.zip"
 
+
+# --------------------------------------------------
+# Cleanup
+# --------------------------------------------------
+
+cleanup() {
+    rm -rf "${ZIP_FILE}""${EXTRACT_DIR}"
+
+}
+
+trap cleanup EXIT
+
 # --------------------------------------------------
 # Dependency Checks
 # --------------------------------------------------
@@ -57,6 +69,8 @@ curl --fail --location \
 echo "Installing ${FONT_FAMILY_NAME}..."
 
 mkdir -p "${INSTALL_DIR}"
+
+rm -rf "${EXTRACT_DIR}"
 mkdir -p "${EXTRACT_DIR}"
 
 unzip -oq \
@@ -69,11 +83,5 @@ find "${EXTRACT_DIR}" \
     -exec install -m 644 {} "${INSTALL_DIR}" \;
 
 fc-cache -fv
-
-# --------------------------------------------------
-# Cleanup
-# --------------------------------------------------
-
-rm -rf "${ZIP_FILE}" "${EXTRACT_DIR}"
 
 echo "Successfully installed ${FONT_FAMILY_NAME}."

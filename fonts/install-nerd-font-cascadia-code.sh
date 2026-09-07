@@ -6,24 +6,24 @@ set -e
 # Configuration
 # --------------------------------------------------
 
-JETBRAINS_MONO_VERSION="2.304"
-FONT_FILE_NAME="JetBrainsMono"
-FONT_FAMILY_NAME="JetBrains Mono"
+FONT_FILE_NAME="CascadiaCode"
+FONT_FAMILY_NAME="CaskaydiaCove Nerd Font"
 
-BASE_URL="https://download.jetbrains.com/fonts"
-DOWNLOAD_URL="${BASE_URL}/${FONT_FILE_NAME}-${JETBRAINS_MONO_VERSION}.zip"
+DOWNLOAD_URL="https://github.com/ryanoasis/nerd-fonts/releases/latest/download/${FONT_FILE_NAME}.zip"
 
 TEMP_DIR="/tmp"
 EXTRACT_DIR="${TEMP_DIR}/${FONT_FILE_NAME}"
 INSTALL_DIR="${HOME}/.local/share/fonts"
 ZIP_FILE="${TEMP_DIR}/${FONT_FILE_NAME}.zip"
 
+
 # --------------------------------------------------
 # Cleanup
 # --------------------------------------------------
 
 cleanup() {
-    rm -rf "${ZIP_FILE}" "${EXTRACT_DIR}"
+    rm -rf "${ZIP_FILE}""${EXTRACT_DIR}"
+
 }
 
 trap cleanup EXIT
@@ -52,19 +52,20 @@ fi
 # --------------------------------------------------
 
 if fc-list | grep -Fq "${FONT_FAMILY_NAME}"; then
-    echo "JetBrains Mono is already installed. Skipping."
+    echo "${FONT_FAMILY_NAME} is already installed. Skipping."
     exit 0
 fi
 
-echo "Downloading ${FONT_FAMILY_NAME} ${JETBRAINS_MONO_VERSION}..."
+echo "Downloading ${FONT_FAMILY_NAME}..."
 
 curl --fail --location \
     --output "${ZIP_FILE}" \
     "${DOWNLOAD_URL}"
 
 # --------------------------------------------------
-# Install Font 
+# Install Font
 # --------------------------------------------------
+
 echo "Installing ${FONT_FAMILY_NAME}..."
 
 mkdir -p "${INSTALL_DIR}"
@@ -83,4 +84,4 @@ find "${EXTRACT_DIR}" \
 
 fc-cache -fv
 
-echo "Successfully installed ${FONT_FAMILY_NAME} ${JETBRAINS_MONO_VERSION}."
+echo "Successfully installed ${FONT_FAMILY_NAME}."
