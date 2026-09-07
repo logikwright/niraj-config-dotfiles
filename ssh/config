@@ -3,3 +3,9 @@ Host nb-wsl
     Port 2222
     User logikwright
     IdentityFile ~/.ssh/id_ed25519
+
+Host nb-wsl
+    HostName logikwright.local
+    Port 22
+    User niraj
+    IdentityFile ~/.ssh/id_ed25519
