@@ -2,7 +2,8 @@ return {
     "rebelot/kanagawa.nvim",
     priority = 1000,
     config = function()
-        require("kanagawa").setup({
+        print("Kanagawa config is running")
+        require('kanagawa').setup({
             undercurl = true,
             commentStyle = {
                 italic = true,
@@ -14,10 +15,10 @@ return {
             statementStyle = {
                 bold = true,
             },
-            transperent = true,
+            transparent = true,
             dimInactive = true,
-            theme = "dragon",
+            theme = "lotus",
         })
-        vim.cmd.colorscheme("kanagawa")
+        vim.cmd.colorscheme("kanagawa-wave")
     end,
 }
