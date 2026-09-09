@@ -1,3 +1,3 @@
 return {
- current = "onenord",
+ current = "material-darker",
 }

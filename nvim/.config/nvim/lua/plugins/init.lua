@@ -4,5 +4,6 @@ return {
     require("plugins.blink"),
     require("plugins.kanagawa"),
     require("plugins.gruvbox"),
-    require("plugins.onenord")
+    require("plugins.onenord"),
+    require("plugins.material")
 }
