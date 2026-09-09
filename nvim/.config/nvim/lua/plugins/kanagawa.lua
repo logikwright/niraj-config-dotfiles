@@ -19,6 +19,5 @@ return {
             dimInactive = true,
             theme = "lotus",
         })
-        vim.cmd.colorscheme("kanagawa-wave")
     end,
 }

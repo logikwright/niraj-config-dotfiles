@@ -1,4 +1,6 @@
 require("options")
 require("autocmds")
 require("keymaps")
+require("my_commands")
 require("bootstrap_lazy")
+require("theme").load()
