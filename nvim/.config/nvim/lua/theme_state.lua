@@ -1,3 +1,3 @@
 return {
- current = "gruvbox",
+ current = "onenord",
 }
