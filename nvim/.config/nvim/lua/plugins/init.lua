@@ -5,5 +5,6 @@ return {
     require("plugins.kanagawa"),
     require("plugins.gruvbox"),
     require("plugins.onenord"),
-    require("plugins.material")
+    require("plugins.material"),
+    require("plugins.neo-tree")
 }
