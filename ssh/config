@@ -4,7 +4,7 @@ Host nb-wsl
     User logikwright
     IdentityFile ~/.ssh/id_ed25519
 
-Host nb-wsl
+Host nb-windows
     HostName logikwright.local
     Port 22
     User niraj
