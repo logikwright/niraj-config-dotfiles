@@ -2,7 +2,6 @@ return {
     "rebelot/kanagawa.nvim",
     priority = 1000,
     config = function()
-        print("Kanagawa config is running")
         require('kanagawa').setup({
             undercurl = true,
             commentStyle = {

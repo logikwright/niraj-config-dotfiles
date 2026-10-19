@@ -2,7 +2,7 @@ return {
     "marko-cerovac/material.nvim",
     priority = 1000,
     config = function()
-        vim.g.material_style = "darker" -- can be : oceanic, deep ocean, palenight, lighter
+        --vim.g.material_style = "darker" -- can be : oceanic, deep ocean, palenight, lighter
 
         require("material").setup({
             disable = {

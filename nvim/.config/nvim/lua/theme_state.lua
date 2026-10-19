@@ -1,3 +1,9 @@
 return {
- current = "material-darker",
+    current = "gruvbox",
+    kanagawa = {
+        theme = "wave",
+    },
+    material = {
+        style = "darker",
+    },
 }
