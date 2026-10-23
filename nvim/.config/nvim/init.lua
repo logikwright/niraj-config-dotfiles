@@ -1,3 +1,8 @@
+-- ===== 2026-10-23 =====
+-- Use space as the global and local leader key.
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 require("options")
 require("autocmds")
 require("keymaps")
